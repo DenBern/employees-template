@@ -18,11 +18,12 @@ class EmployeesAddForm extends Component {
 
   onSubmit = (e) => {
     e.preventDefault();
-    this.props.onAdd(this.state.name, this.state.salary);
-    this.setState({
-      name: '',
-      salary: ''
-    })
+    if(this.state.name < 3 || !this.state.salary) return;
+      this.props.onAdd(this.state.name, this.state.salary);
+        this.setState({
+          name: '',
+          salary: '',
+        })
   }
 
   render () {
@@ -35,6 +36,7 @@ class EmployeesAddForm extends Component {
           onSubmit={this.onSubmit}>
           <input 
             type="text"
+            minLength={3}
             className="form-control new-post-label"
             placeholder="Как его зовут?"
             name="name"
